@@ -4,12 +4,12 @@
     "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.999437153339386,\n    \"y\" : 0.01431107707321644,\n    \"z\" : -0.03198223188519478,\n    \"t\" : -0.313889354467392\n    },\n  \"row1\" : {\n    \"x\" : 7.151991667342372e-06,\n    \"y\" : 0.912831723690033,\n    \"z\" : 0.4083052277565002,\n    \"t\" : 4.006466865539551\n    },\n  \"row2\" : {\n    \"x\" : 0.03503851965069771,\n    \"y\" : 0.4080221951007843,\n    \"z\" : -0.9123432636260986,\n    \"t\" : -8.952547073364258\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
     "timeline_loopMode" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 0.7750133872032166\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.9437658786773682\n  }",
     "timeline_simMode" : "0",
     "camera_focalDistance" : "9.814150810241699",
     "timeline_current" : "314",
     "timeline_end" : "1000",
-    "uiGraphPan" : "{\n  \"x\" : -182.3110015530701,\n  \"y\" : -53.10332099267612\n  }"
+    "uiGraphPan" : "{\n  \"x\" : -370.3135862932807,\n  \"y\" : -30.04648149950892\n  }"
     },
   "title" : "",
   "ports" : [
@@ -19,13 +19,6 @@
       "name" : "this",
       "execPortType" : "Out",
       "typeSpec" : "DrawingHandle"
-      },
-    {
-      "objectType" : "Port",
-      "nodePortType" : "In",
-      "name" : "debugHandle",
-      "execPortType" : "Out",
-      "typeSpec" : "InlineDebugShape"
       },
     {
       "objectType" : "Port",
@@ -293,7 +286,7 @@
             }
           ],
         "extDeps" : {},
-        "code" : "dfgEntry {\n  outpositions.resize(inpositions.size());\n  \n  SInt32 N = 10;\n  Float32 kPersistence = persistance;\n  \n  for(SInt32 i = 0 ; i < inpositions.size() ; ++i) {\n    Vec3 p = inpositions[i];\n    \n    Float32 noise = 0.0f;\n    Float32 sum_amp = 0.0f;\n    for(SInt32 j = 0 ; j < N ; ++j) {\n      Float32 freq = 0.5 * pow(2.0, Float32(j));\n      Float32 amp = pow(kPersistence, Float32(j));\n      Float32 value = perlinNoise(p.x * freq, 0.0, (p.z + offsetz) * freq) * amp;\n      noise += value;\n      sum_amp += amp;\n    }\n    noise /= sum_amp;\n    p.y = noise;\n    // p.y = perlinNoise(p.x * 1.0, 0.0, p.z * 0.9);\n\n    outpositions[i] = p;\n  }\n  // inpositions = outpositions;\n}\n"
+        "code" : "dfgEntry {\n  outpositions.resize(inpositions.size());\n  \n  SInt32 N = 10;\n  Float32 kPersistence = persistance;\n  \n  for(SInt32 i = 0 ; i < inpositions.size() ; ++i) {\n    Vec3 p = inpositions[i];\n    \n    Float32 noise = 0.0f;\n    Float32 sum_amp = 0.0f;\n    for(SInt32 j = 0 ; j < N ; ++j) {\n      Float32 freq = 0.5 * pow(2.0, Float32(j));\n      Float32 amp = pow(kPersistence, Float32(j));\n      Float32 value = perlinNoise(p.x * freq, 0.0, (p.z + offsetz) * freq) * amp;\n      noise += value;\n      sum_amp += amp;\n    }\n    noise /= sum_amp;\n    p.y = noise;\n    \n    outpositions[i] = p;\n  }\n}\n"
         }
       },
     {
@@ -1562,11 +1555,6 @@
   "args" : [
     {
       "type" : "DrawingHandle",
-      "value" : null,
-      "ext" : "InlineDrawing"
-      },
-    {
-      "type" : "InlineDebugShape",
       "value" : null,
       "ext" : "InlineDrawing"
       },
